@@ -1,0 +1,72 @@
+:root {
+  color-scheme: light;
+  font-family:
+    "Segoe UI Variable", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui,
+    sans-serif;
+  color: #1f2937;
+  background:
+    radial-gradient(circle at top left, rgba(0, 120, 212, 0.08), transparent 24%),
+    radial-gradient(circle at top right, rgba(255, 185, 0, 0.08), transparent 22%),
+    linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  --bg-page: #f9fafb;
+  --bg-surface: #ffffff;
+  --bg-surface-soft: #f3f6fa;
+  --bg-hover: #eef5fc;
+  --border-color: #d6deea;
+  --border-strong: #c8d3e1;
+  --text-primary: #1f2937;
+  --text-secondary: #5f6f82;
+  --text-muted: #7b8798;
+  --brand: #0078d4;
+  --brand-soft: #e8f3fc;
+  --success: #107c10;
+  --warning: #b76e00;
+  --danger: #c42b1c;
+  --shadow-soft: 0 6px 22px rgba(15, 23, 42, 0.06);
+  --radius-panel: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  min-width: 1280px;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: none;
+}
+
+.panel-title {
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.panel-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
