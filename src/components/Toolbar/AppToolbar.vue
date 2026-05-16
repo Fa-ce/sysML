@@ -42,6 +42,7 @@ const viewOptions = [
   { label: "通用视图", value: "general" },
   { label: "互连视图", value: "ibd" },
   { label: "需求视图", value: "requirements" },
+  { label: "行为视图", value: "behavior" },
 ];
 
 const errorCount = computed(
@@ -66,7 +67,7 @@ const statusText = computed(() => {
 });
 
 function onViewChange(value: string | number) {
-  viewStore.setActiveView(value as "general" | "ibd" | "requirements");
+  viewStore.setActiveView(value as "general" | "ibd" | "requirements" | "behavior");
 }
 
 function onSearchChange(event: Event) {

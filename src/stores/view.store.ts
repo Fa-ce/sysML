@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export type DiagramView = "general" | "ibd" | "requirements";
+export type DiagramView = "general" | "ibd" | "requirements" | "behavior";
 type PositionMap = Record<string, { x: number; y: number }>;
 
 export const useViewStore = defineStore("view", () => {
@@ -12,6 +12,7 @@ export const useViewStore = defineStore("view", () => {
     general: {},
     ibd: {},
     requirements: {},
+    behavior: {},
   });
 
   const setActiveView = (view: DiagramView) => {

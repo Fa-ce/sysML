@@ -2,14 +2,68 @@ export type ElementKind =
   | "package"
   | "partDef"
   | "partUsage"
+  | "itemDef"
+  | "itemUsage"
+  | "portDef"
+  | "portUsage"
+  | "connectionDef"
   | "requirementDef"
   | "requirementUsage"
   | "interfaceDef"
+  | "interfaceUsage"
+  | "actionDef"
+  | "actionUsage"
+  | "stateDef"
+  | "stateUsage"
+  | "constraintDef"
+  | "constraintUsage"
   | "attribute"
+  | "attributeUsage"
   | "operation"
-  | "port";
+  | "port"
+  | "controlNode"
+  | "useCaseDef"
+  | "useCaseUsage"
+  | "calculationDef"
+  | "calculationUsage"
+  | "caseDef"
+  | "analysisCaseDef"
+  | "verificationCaseDef"
+  | "viewDef"
+  | "viewUsage"
+  | "viewpointDef"
+  | "viewpointUsage"
+  | "renderingDef"
+  | "metadataDef"
+  | "comment"
+  | "documentation"
+  | "textualRepresentation"
+  | "subject"
+  | "stakeholder";
 
-export type RelationKind = "containment" | "binding" | "satisfy" | "reference";
+export type RelationKind =
+  | "containment"
+  | "binding"
+  | "satisfy"
+  | "reference"
+  | "connection"
+  | "dependency"
+  | "flow"
+  | "succession"
+  | "perform"
+  | "exhibit"
+  | "transition"
+  | "specialization"
+  | "accept"
+  | "send"
+  | "require"
+  | "verify"
+  | "import"
+  | "expose"
+  | "redefinition"
+  | "subsetting"
+  | "annotate"
+  | "allocate";
 
 export interface RangeInfo {
   line: number;
@@ -53,4 +107,3 @@ export interface ParseResult {
   model: SysmlModel;
   diagnostics: DiagnosticItem[];
 }
-

@@ -1,42 +1,15 @@
-import { onUnmounted } from "vue";
 import { useModelStore } from "@/stores/model.store";
-import type { ParseResult } from "@/parser/types";
+import { parseSysmlRemote } from "@/api/sysml";
 
 export function useParser() {
   const modelStore = useModelStore();
-  let worker: Worker | null = null;
-  const pending = new Map<
-    string,
-    {
-      resolve: (value: ParseResult) => void;
-      reject: (reason?: unknown) => void;
-    }
-  >();
-
-  const getWorker = () => {
-    if (!worker) {
-      worker = new Worker(new URL("../workers/parser.worker.ts", import.meta.url), {
-        type: "module",
-      });
-      worker.onmessage = (event) => {
-        const { id, type, result, error } = event.data;
-        const current = pending.get(id);
-        if (!current) return;
-        pending.delete(id);
-        if (type === "success") current.resolve(result);
-        else current.reject(error);
-      };
-    }
-    return worker;
-  };
 
   const parse = async (text: string) => {
-    const id = crypto.randomUUID();
     try {
-      const result = await new Promise<ParseResult>((resolve, reject) => {
-        pending.set(id, { resolve, reject });
-        getWorker().postMessage({ id, text });
-      });
+      const result = await parseSysmlRemote(text);
+      if (result.unmappedKinds.nodeKinds.length || result.unmappedKinds.edgeKinds.length) {
+        console.warn("Unmapped SysML kinds from backend:", result.unmappedKinds);
+      }
       modelStore.setParseResult(result.model, result.diagnostics);
       return result;
     } catch (error) {
@@ -55,11 +28,5 @@ export function useParser() {
     }
   };
 
-  onUnmounted(() => {
-    worker?.terminate();
-    worker = null;
-  });
-
   return { parse };
 }
-

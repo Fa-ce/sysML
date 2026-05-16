@@ -24,7 +24,6 @@ import { useSelectionStore } from "@/stores/selection.store";
 import { useGraph } from "./useGraph";
 import { buildGraph } from "@/renderer";
 import { applyAutoLayout } from "@/composables/useAutoLayout";
-import { getKindMeta } from "@/constants/model-kinds";
 
 const containerRef = ref<HTMLDivElement | null>(null);
 const minimapRef = ref<HTMLDivElement | null>(null);
@@ -42,17 +41,20 @@ const renderGraph = (forceLayout = false) => {
   });
   const hasSavedPosition = Object.keys(positions).length > 0;
   if (forceLayout || !hasSavedPosition) {
-    applyAutoLayout(graph);
-    syncCurrentPositions();
-    graph.centerContent();
+    // 等节点 Vue 组件挂载完成自适应尺寸后再布局
+    setTimeout(() => {
+      applyAutoLayout(graph);
+      syncCurrentPositions();
+      graph.centerContent();
+    }, 50);
   }
-  applySelectionState();
 };
 
 onMounted(() => {
   const graph = graphController.create();
   if (!graph) return;
 
+  // Inspector 联动：click 触发 selectionStore 同步
   graph.on("node:click", ({ node }) => {
     selectionStore.select(node.id, "node");
   });
@@ -81,10 +83,23 @@ watch(
   { deep: true },
 );
 
+// 外部 selection store 变化 → 同步 X6 内部选中态
 watch(
   [() => selectionStore.selectedId, () => selectionStore.selectedKind],
-  () => {
-    applySelectionState();
+  ([id, kind]) => {
+    const graph = graphController.graph;
+    if (!graph) return;
+    if (kind === "node" && id) {
+      const node = graph.getCellById(id);
+      if (node && node.isNode()) {
+        graph.trigger("node:selected", { node });
+      }
+    } else {
+      // 清除所有节点的 selected 状态
+      graph.getNodes().forEach((node) => {
+        graph.trigger("node:unselected", { node });
+      });
+    }
   },
 );
 
@@ -110,65 +125,6 @@ function syncCurrentPositions() {
   if (!graph) return;
   graph.getNodes().forEach((node) => {
     viewStore.setNodePosition(viewStore.activeView, node.id, node.getPosition());
-  });
-}
-
-function applySelectionState() {
-  const graph = graphController.graph;
-  if (!graph) return;
-
-  graph.getNodes().forEach((node) => {
-    const data = node.getData() as { kind?: Parameters<typeof getKindMeta>[0] } | undefined;
-    const kind = data?.kind;
-    if (!kind) return;
-    const meta = getKindMeta(kind);
-    const isUsage = kind === "partUsage" || kind === "requirementUsage";
-    const isSelected =
-      selectionStore.selectedKind === "node" && selectionStore.selectedId === node.id;
-
-    node.attr({
-      body: {
-        stroke: isSelected ? "#0078D4" : meta.border,
-        strokeWidth: isSelected ? 3 : 1.5,
-        fill: meta.bg,
-        rx: isUsage ? 8 : 4,
-        ry: isUsage ? 8 : 4,
-        filter: isSelected
-          ? {
-              name: "dropShadow",
-              args: {
-                dx: 0,
-                dy: 2,
-                blur: 6,
-                color: "rgba(0, 120, 212, 0.28)",
-              },
-            }
-          : undefined,
-      },
-    });
-  });
-
-  graph.getEdges().forEach((edge) => {
-    const data = edge.getData() as { kind?: string } | undefined;
-    const isSelected =
-      selectionStore.selectedKind === "edge" && selectionStore.selectedId === edge.id;
-    const baseStroke =
-      data?.kind === "binding"
-        ? "#d38b00"
-        : data?.kind === "satisfy"
-          ? "#c2397a"
-          : data?.kind === "containment"
-            ? "#b2bfce"
-            : "#7b8798";
-    const baseStrokeWidth = data?.kind === "containment" ? 1 : 1.3;
-
-    edge.attr({
-      line: {
-        stroke: isSelected ? "#0078D4" : baseStroke,
-        strokeWidth: isSelected ? 2.4 : baseStrokeWidth,
-        opacity: data?.kind === "containment" ? 0.55 : 1,
-      },
-    });
   });
 }
 </script>

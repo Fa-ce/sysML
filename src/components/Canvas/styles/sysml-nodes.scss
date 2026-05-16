@@ -1,0 +1,543 @@
+// SysML v2 节点样式
+// 配色按 SysML 元素类别分组，使用 CSS 变量驱动
+
+:root {
+  // === 结构类（绿色家族）===
+  --sysml-part: #0F766E;
+  --sysml-part-bg: #F0FDFA;
+  --sysml-item: #059669;
+  --sysml-item-bg: #ECFDF5;
+
+  // === 接口类（蓝紫家族）===
+  --sysml-interface: #4F46E5;
+  --sysml-interface-bg: #EEF2FF;
+  --sysml-port: #3B82F6;
+  --sysml-port-bg: #EFF6FF;
+  --sysml-connection: #7C3AED;
+  --sysml-connection-bg: #FAF5FF;
+
+  // === 行为类（暖色 + 青色）===
+  --sysml-action: #DC2626;
+  --sysml-action-bg: #FEF2F2;
+  --sysml-state: #0891B2;
+  --sysml-state-bg: #ECFEFF;
+  --sysml-usecase: #7C3AED;
+  --sysml-usecase-bg: #FAF5FF;
+  --sysml-control: #64748B;
+  --sysml-control-bg: #F1F5F9;
+  --sysml-calculation: #6366F1;
+  --sysml-calculation-bg: #EEF2FF;
+
+  // === 需求/分析类（橙色家族）===
+  --sysml-requirement: #EA580C;
+  --sysml-requirement-bg: #FFF7ED;
+  --sysml-constraint: #9333EA;
+  --sysml-constraint-bg: #FAF5FF;
+  --sysml-case: #DC2626;
+  --sysml-case-bg: #FEF2F2;
+  --sysml-analysis: #F59E0B;
+  --sysml-analysis-bg: #FFFBEB;
+  --sysml-verification: #16A34A;
+  --sysml-verification-bg: #F0FDF4;
+
+  // === 容器/组织类（中性色家族）===
+  --sysml-package: #475569;
+  --sysml-package-bg: #F8FAFC;
+  --sysml-view: #64748B;
+  --sysml-view-bg: #F1F5F9;
+  --sysml-viewpoint: #64748B;
+  --sysml-viewpoint-bg: #F1F5F9;
+  --sysml-rendering: #64748B;
+  --sysml-rendering-bg: #F1F5F9;
+  --sysml-metadata: #64748B;
+  --sysml-metadata-bg: #F1F5F9;
+  --sysml-subject: #64748B;
+  --sysml-subject-bg: #F1F5F9;
+  --sysml-stakeholder: #64748B;
+  --sysml-stakeholder-bg: #F1F5F9;
+
+  // === 注释类（黄色家族）===
+  --sysml-annotation: #CA8A04;
+  --sysml-annotation-bg: #FEFCE8;
+
+  // === 中性色（文字/边框）===
+  --sysml-text-primary: #1E293B;
+  --sysml-text-secondary: #64748B;
+  --sysml-text-tertiary: #94A3B8;
+  --sysml-text-muted: #CBD5E1;
+  --sysml-border: #E2E8F0;
+  --sysml-border-soft: #F1F5F9;
+  --sysml-bg: #FFFFFF;
+  --sysml-bg-soft: #FAFBFC;
+}
+
+// === 通用节点外壳 ===
+.sysml-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 360px;
+  background: var(--sysml-bg);
+  border: 1px solid var(--sysml-border);
+  border-left: 3px solid var(--node-color, var(--sysml-border));
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.04);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--sysml-text-primary);
+  overflow: hidden;
+  transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease,
+    opacity 0.18s ease;
+  user-select: none;
+  cursor: grab;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.05);
+    transform: translateY(-1px);
+  }
+
+  &.is-selected {
+    border-color: var(--node-color, #3B82F6);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--node-color, #3B82F6) 22%, transparent),
+      0 4px 12px rgba(15, 23, 42, 0.1);
+    z-index: 10;
+  }
+
+  // === 视图差异化：配角节点 ===
+  &.is-secondary {
+    opacity: 0.62;
+    transform: scale(0.92);
+    transform-origin: top left;
+
+    &:hover {
+      opacity: 0.95;
+      transform: scale(0.95);
+    }
+
+    // 配角不显示 compartments（如果有）
+    .sysml-node__compartment {
+      display: none;
+    }
+
+    // 配角 header 紧凑
+    .sysml-node__header {
+      padding: 8px 12px 6px;
+      min-height: 28px;
+    }
+    .sysml-node__name {
+      font-size: 12px;
+    }
+    .sysml-node__chip {
+      font-size: 9.5px;
+      padding: 1px 6px;
+    }
+  }
+
+  // === 视图差异化：主角节点在 Requirements 视图下更突出 ===
+  &.is-primary.sysml-view--requirements {
+    &.sysml-node--requirement-def,
+    &.sysml-node--requirement-usage {
+      box-shadow: 0 4px 14px color-mix(in srgb, var(--node-color) 18%, transparent),
+        0 1px 3px rgba(15, 23, 42, 0.06);
+      border-left-width: 5px;
+    }
+  }
+
+  // === Behavior 视图：action/state 加边框感增强 ===
+  &.is-primary.sysml-view--behavior {
+    &.sysml-node--action-def,
+    &.sysml-node--action-usage,
+    &.sysml-node--state-def,
+    &.sysml-node--state-usage {
+      border-width: 1.5px;
+      border-left-width: 4px;
+    }
+  }
+
+  // === IBD 视图：节点更紧凑 ===
+  &.sysml-view--ibd {
+    &.sysml-node--part-usage,
+    &.sysml-node--part-def {
+      min-width: 180px;
+
+      .sysml-node__compartment {
+        padding: 4px 14px 6px;
+      }
+      .sysml-node__compartment-item {
+        padding: 0;
+      }
+    }
+  }
+}
+
+// === Header（chip + name） ===
+.sysml-node__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px 8px;
+  min-height: 36px;
+}
+
+.sysml-node__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--node-color, #94A3B8) 12%, transparent);
+  color: var(--node-color, var(--sysml-text-secondary));
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.sysml-node__name-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.sysml-node__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sysml-text-primary);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.sysml-node__type-suffix {
+  color: var(--sysml-text-secondary);
+  font-weight: 500;
+}
+
+.sysml-node__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--sysml-text-tertiary);
+}
+
+.sysml-node__multiplicity {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+  background: var(--sysml-border-soft);
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.sysml-node__modifier {
+  font-style: italic;
+  color: var(--sysml-text-tertiary);
+  font-size: 10px;
+}
+
+.sysml-node__doc-icon {
+  cursor: help;
+}
+
+.sysml-node__visibility {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--sysml-text-tertiary);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+// === Compartment（分区） ===
+.sysml-node__compartment {
+  padding: 6px 14px 8px;
+  border-top: 1px solid var(--sysml-border-soft);
+  background: var(--sysml-bg-soft);
+
+  &:last-child {
+    padding-bottom: 10px;
+  }
+}
+
+.sysml-node__compartment-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--sysml-text-tertiary);
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.sysml-node__compartment-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 0;
+  font-size: 12px;
+  line-height: 1.5;
+
+  &-bullet {
+    color: var(--node-color, var(--sysml-text-tertiary));
+    font-size: 9px;
+    flex-shrink: 0;
+  }
+
+  &-name {
+    color: var(--sysml-text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-type {
+    margin-left: auto;
+    color: var(--sysml-text-secondary);
+    font-family: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+    font-size: 10.5px;
+    flex-shrink: 0;
+  }
+
+  &-direction {
+    color: var(--sysml-text-tertiary);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    margin-right: 2px;
+  }
+
+  &-empty {
+    color: var(--sysml-text-muted);
+    font-style: italic;
+    padding: 2px 0;
+  }
+}
+
+// === 类别变体 ===
+.sysml-node--part-def {
+  --node-color: var(--sysml-part);
+  background: var(--sysml-part-bg);
+}
+.sysml-node--part-usage {
+  --node-color: var(--sysml-part);
+  background: var(--sysml-part-bg);
+  border-style: dashed;
+}
+.sysml-node--item-def,
+.sysml-node--item-usage {
+  --node-color: var(--sysml-item);
+  background: var(--sysml-item-bg);
+}
+.sysml-node--item-usage {
+  border-style: dashed;
+}
+
+.sysml-node--interface-def,
+.sysml-node--interface-usage {
+  --node-color: var(--sysml-interface);
+  background: var(--sysml-interface-bg);
+}
+.sysml-node--interface-usage {
+  border-style: dashed;
+}
+
+.sysml-node--port-def,
+.sysml-node--port-usage {
+  --node-color: var(--sysml-port);
+  background: var(--sysml-port-bg);
+}
+.sysml-node--connection-def {
+  --node-color: var(--sysml-connection);
+  background: var(--sysml-connection-bg);
+}
+
+.sysml-node--action-def,
+.sysml-node--action-usage {
+  --node-color: var(--sysml-action);
+  background: var(--sysml-action-bg);
+  border-radius: 16px;
+}
+.sysml-node--action-usage {
+  border-style: dashed;
+}
+
+.sysml-node--state-def,
+.sysml-node--state-usage {
+  --node-color: var(--sysml-state);
+  background: var(--sysml-state-bg);
+  border-radius: 16px;
+}
+.sysml-node--state-usage {
+  border-style: dashed;
+}
+
+.sysml-node--requirement-def,
+.sysml-node--requirement-usage {
+  --node-color: var(--sysml-requirement);
+  background: var(--sysml-requirement-bg);
+  // 折角效果：右上角斜切
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  position: relative;
+}
+.sysml-node--requirement-def::after,
+.sysml-node--requirement-usage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, transparent 50%, var(--node-color) 50%);
+  opacity: 0.2;
+}
+.sysml-node--requirement-usage {
+  border-style: dashed;
+}
+
+.sysml-node--constraint-def,
+.sysml-node--constraint-usage {
+  --node-color: var(--sysml-constraint);
+  background: var(--sysml-constraint-bg);
+}
+
+.sysml-node--use-case-def,
+.sysml-node--use-case-usage {
+  --node-color: var(--sysml-usecase);
+  background: var(--sysml-usecase-bg);
+  border-radius: 50% / 50%;
+  min-width: 160px;
+  min-height: 80px;
+  padding: 16px 24px;
+  align-items: center;
+  justify-content: center;
+
+  .sysml-node__header {
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+  .sysml-node__name {
+    text-align: center;
+  }
+  .sysml-node__chip {
+    margin-top: 0;
+  }
+}
+.sysml-node--use-case-usage {
+  border-style: dashed;
+}
+
+.sysml-node--control-node {
+  --node-color: var(--sysml-control);
+  background: var(--sysml-control-bg);
+  border-radius: 50%;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-left-width: 1px;
+
+  .sysml-node__header {
+    padding: 0;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .sysml-node__chip {
+    display: none;
+  }
+  .sysml-node__name {
+    font-size: 10px;
+    color: var(--node-color);
+    font-weight: 600;
+  }
+  .sysml-node__meta {
+    display: none;
+  }
+}
+
+.sysml-node--calculation-def,
+.sysml-node--calculation-usage {
+  --node-color: var(--sysml-calculation);
+  background: var(--sysml-calculation-bg);
+}
+
+.sysml-node--case-def {
+  --node-color: var(--sysml-case);
+  background: var(--sysml-case-bg);
+}
+.sysml-node--analysis-case-def {
+  --node-color: var(--sysml-analysis);
+  background: var(--sysml-analysis-bg);
+}
+.sysml-node--verification-case-def {
+  --node-color: var(--sysml-verification);
+  background: var(--sysml-verification-bg);
+}
+
+.sysml-node--package {
+  --node-color: var(--sysml-package);
+  background: var(--sysml-package-bg);
+  overflow: visible;
+}
+.sysml-node--package .sysml-node__tab {
+  position: absolute;
+  top: -14px;
+  left: 14px;
+  height: 16px;
+  padding: 0 12px;
+  background: var(--node-color);
+  color: #fff;
+  border-radius: 6px 6px 0 0;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.sysml-node--view-def,
+.sysml-node--view-usage,
+.sysml-node--viewpoint-def,
+.sysml-node--viewpoint-usage,
+.sysml-node--rendering-def,
+.sysml-node--metadata-def {
+  --node-color: var(--sysml-view);
+  background: var(--sysml-view-bg);
+}
+
+.sysml-node--subject,
+.sysml-node--stakeholder {
+  --node-color: var(--sysml-subject);
+  background: var(--sysml-subject-bg);
+  border-radius: 999px;
+  padding: 4px 16px;
+  min-width: 140px;
+
+  .sysml-node__header {
+    padding: 6px 0;
+  }
+}
+
+.sysml-node--comment,
+.sysml-node--documentation,
+.sysml-node--textual-representation {
+  --node-color: var(--sysml-annotation);
+  background: var(--sysml-annotation-bg);
+  border-style: dashed;
+  min-width: 160px;
+
+  .sysml-node__name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sysml-text-secondary);
+  }
+}

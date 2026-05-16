@@ -7,6 +7,7 @@ export const useModelStore = defineStore("model", () => {
   const model = ref<SysmlModel>({ elements: [], relations: [] });
   const diagnostics = ref<DiagnosticItem[]>([]);
   const isParsing = ref(false);
+  const focusLine = ref<number | null>(null);
 
   const setSourceText = (text: string) => {
     sourceText.value = text;
@@ -26,15 +27,20 @@ export const useModelStore = defineStore("model", () => {
     isParsing.value = false;
   };
 
+  const setFocusLine = (line: number | null) => {
+    focusLine.value = line;
+  };
+
   return {
     sourceText,
     model,
     diagnostics,
     isParsing,
+    focusLine,
     setSourceText,
     setIsParsing,
     setDiagnostics,
     setParseResult,
+    setFocusLine,
   };
 });
-

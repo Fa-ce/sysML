@@ -32,26 +32,36 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { sysmlSnippets } from "@/constants/snippets";
+import { computed, onMounted } from "vue";
+import { fetchRemoteSnippets } from "@/api/sysml";
 import { useUiStore } from "@/stores/ui.store";
 
 const uiStore = useUiStore();
 
 const groups = computed(() => {
-  const groupMap = new Map<string, { name: string; items: typeof sysmlSnippets }>();
-  sysmlSnippets.forEach((snippet) => {
-    if (!groupMap.has(snippet.group)) {
-      groupMap.set(snippet.group, { name: snippet.group, items: [] });
-    }
-    groupMap.get(snippet.group)!.items.push(snippet);
-  });
-  return [...groupMap.values()];
+  return Object.entries(uiStore.snippetCategories).map(([name, items]) => ({
+    name,
+    items: items.map((item) => ({
+      id: item.key,
+      title: item.label,
+      description: item.code,
+      body: item.code,
+    })),
+  }));
 });
 
 function insertSnippet(snippet: string) {
   uiStore.queueSnippetInsert(snippet);
 }
+
+onMounted(async () => {
+  try {
+    const result = await fetchRemoteSnippets();
+    uiStore.setSnippetCategories(result.categories);
+  } catch (error) {
+    console.warn("加载代码片段失败:", error);
+  }
+});
 </script>
 
 <style scoped>

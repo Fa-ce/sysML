@@ -169,6 +169,19 @@ watch(
   },
 );
 
+watch(
+  () => modelStore.focusLine,
+  (line) => {
+    if (!editorView || !line) return;
+    const lineInfo = editorView.state.doc.line(Math.min(line, editorView.state.doc.lines));
+    editorView.dispatch({
+      selection: { anchor: lineInfo.from },
+      effects: EditorView.scrollIntoView(lineInfo.from, { y: "center" }),
+    });
+    editorView.focus();
+  },
+);
+
 function onReady(payload: { view: EditorView }) {
   editorView = payload.view;
 }

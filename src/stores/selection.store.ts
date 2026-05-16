@@ -18,11 +18,16 @@ export const useSelectionStore = defineStore("selection", () => {
   const select = (id: string, kind: "node" | "edge") => {
     selectedId.value = id;
     selectedKind.value = kind;
+    if (kind === "node") {
+      const line = modelStore.model.elements.find((item) => item.id === id)?.line ?? null;
+      modelStore.setFocusLine(line);
+    }
   };
 
   const clear = () => {
     selectedId.value = null;
     selectedKind.value = null;
+    modelStore.setFocusLine(null);
   };
 
   return {
@@ -34,4 +39,3 @@ export const useSelectionStore = defineStore("selection", () => {
     clear,
   };
 });
-
