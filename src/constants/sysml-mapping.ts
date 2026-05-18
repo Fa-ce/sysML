@@ -43,7 +43,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   package: {
     kind: "package",
     label: "包",
-    icon: "📁",
+    icon: "FolderOutlined",
     family: "structure",
     shape: "package",
     role: "container",
@@ -62,7 +62,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   partDef: {
     kind: "partDef",
     label: "部件定义",
-    icon: "■",
+    icon: "BlockOutlined",
     family: "structure",
     shape: "part",
     role: "primary",
@@ -82,7 +82,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   partUsage: {
     kind: "partUsage",
     label: "部件",
-    icon: "□",
+    icon: "BorderOutlined",
     family: "structure",
     shape: "part",
     role: "instance",
@@ -102,7 +102,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   itemDef: {
     kind: "itemDef",
     label: "物件定义",
-    icon: "◇",
+    icon: "GoldOutlined",
     family: "structure",
     shape: "default",
     role: "definition",
@@ -116,7 +116,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   itemUsage: {
     kind: "itemUsage",
     label: "物件",
-    icon: "◇",
+    icon: "GoldOutlined",
     family: "structure",
     shape: "default",
     role: "usage",
@@ -130,7 +130,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   portDef: {
     kind: "portDef",
     label: "端口定义",
-    icon: "◎",
+    icon: "NumberOutlined",
     family: "interface",
     shape: "default",
     role: "definition",
@@ -144,7 +144,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   portUsage: {
     kind: "portUsage",
     label: "端口",
-    icon: "◎",
+    icon: "NumberOutlined",
     family: "interface",
     shape: "default",
     role: "usage",
@@ -158,7 +158,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   connectionDef: {
     kind: "connectionDef",
     label: "连接定义",
-    icon: "◇",
+    icon: "LinkOutlined",
     family: "interface",
     shape: "connection",
     role: "definition",
@@ -176,7 +176,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   requirementDef: {
     kind: "requirementDef",
     label: "需求定义",
-    icon: "📋",
+    icon: "FileTextOutlined",
     family: "requirement",
     shape: "requirement",
     role: "definition",
@@ -196,7 +196,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   requirementUsage: {
     kind: "requirementUsage",
     label: "需求",
-    icon: "📄",
+    icon: "FileOutlined",
     family: "requirement",
     shape: "requirement",
     role: "usage",
@@ -216,7 +216,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   interfaceDef: {
     kind: "interfaceDef",
     label: "接口定义",
-    icon: "○",
+    icon: "ApiOutlined",
     family: "interface",
     shape: "interface",
     role: "definition",
@@ -235,7 +235,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   interfaceUsage: {
     kind: "interfaceUsage",
     label: "接口",
-    icon: "○",
+    icon: "ApiOutlined",
     family: "interface",
     shape: "interface",
     role: "usage",
@@ -249,7 +249,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   actionDef: {
     kind: "actionDef",
     label: "动作定义",
-    icon: "▶",
+    icon: "PlayCircleOutlined",
     family: "behavior",
     shape: "action",
     role: "definition",
@@ -269,7 +269,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   actionUsage: {
     kind: "actionUsage",
     label: "动作",
-    icon: "▷",
+    icon: "PlayCircleOutlined",
     family: "behavior",
     shape: "action",
     role: "usage",
@@ -289,7 +289,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   stateDef: {
     kind: "stateDef",
     label: "状态定义",
-    icon: "◐",
+    icon: "SyncOutlined",
     family: "behavior",
     shape: "state",
     role: "definition",
@@ -308,7 +308,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   stateUsage: {
     kind: "stateUsage",
     label: "状态",
-    icon: "◐",
+    icon: "SyncOutlined",
     family: "behavior",
     shape: "state",
     role: "usage",
@@ -327,7 +327,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   constraintDef: {
     kind: "constraintDef",
     label: "约束定义",
-    icon: "🔒",
+    icon: "LockOutlined",
     family: "constraint",
     shape: "default",
     role: "definition",
@@ -341,7 +341,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   constraintUsage: {
     kind: "constraintUsage",
     label: "约束",
-    icon: "🔒",
+    icon: "LockOutlined",
     family: "constraint",
     shape: "default",
     role: "usage",
@@ -355,7 +355,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   attribute: {
     kind: "attribute",
     label: "属性",
-    icon: "⬡",
+    icon: "FieldNumberOutlined",
     family: "structure",
     shape: "default",
     role: "member",
@@ -369,7 +369,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   operation: {
     kind: "operation",
     label: "操作",
-    icon: "⚙",
+    icon: "FunctionOutlined",
     family: "structure",
     shape: "default",
     role: "member",
@@ -383,7 +383,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   port: {
     kind: "port",
     label: "端口",
-    icon: "◎",
+    icon: "ApiOutlined",
     family: "interface",
     shape: "default",
     role: "member",
@@ -397,7 +397,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   controlNode: {
     kind: "controlNode",
     label: "控制节点",
-    icon: "●",
+    icon: "NodeIndexOutlined",
     family: "behavior",
     shape: "circle",
     role: "control",
@@ -411,7 +411,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   useCaseDef: {
     kind: "useCaseDef",
     label: "用例定义",
-    icon: "◈",
+    icon: "BorderOutlined",
     family: "behavior",
     shape: "usecase",
     role: "definition",
@@ -425,7 +425,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   useCaseUsage: {
     kind: "useCaseUsage",
     label: "用例",
-    icon: "◈",
+    icon: "BorderOutlined",
     family: "behavior",
     shape: "usecase",
     role: "usage",
@@ -439,7 +439,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   calculationDef: {
     kind: "calculationDef",
     label: "计算定义",
-    icon: "∑",
+    icon: "ToolOutlined",
     family: "analysis",
     shape: "default",
     role: "definition",
@@ -457,7 +457,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   calculationUsage: {
     kind: "calculationUsage",
     label: "计算",
-    icon: "∑",
+    icon: "ToolOutlined",
     family: "analysis",
     shape: "default",
     role: "usage",
@@ -471,7 +471,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   caseDef: {
     kind: "caseDef",
     label: "用例定义",
-    icon: "▦",
+    icon: "FileTextOutlined",
     family: "analysis",
     shape: "case",
     role: "definition",
@@ -485,7 +485,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   analysisCaseDef: {
     kind: "analysisCaseDef",
     label: "分析用例",
-    icon: "▥",
+    icon: "CalculatorOutlined",
     family: "analysis",
     shape: "case",
     role: "definition",
@@ -499,7 +499,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   verificationCaseDef: {
     kind: "verificationCaseDef",
     label: "验证用例",
-    icon: "▤",
+    icon: "CheckOutlined",
     family: "analysis",
     shape: "case",
     role: "definition",
@@ -513,7 +513,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   viewDef: {
     kind: "viewDef",
     label: "视图定义",
-    icon: "▢",
+    icon: "BorderOutlined",
     family: "structure",
     shape: "default",
     role: "definition",
@@ -527,7 +527,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   viewUsage: {
     kind: "viewUsage",
     label: "视图",
-    icon: "▢",
+    icon: "BorderOutlined",
     family: "structure",
     shape: "default",
     role: "usage",
@@ -541,7 +541,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   viewpointDef: {
     kind: "viewpointDef",
     label: "视点定义",
-    icon: "◆",
+    icon: "EyeOutlined",
     family: "structure",
     shape: "default",
     role: "definition",
@@ -555,7 +555,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   viewpointUsage: {
     kind: "viewpointUsage",
     label: "视点",
-    icon: "◆",
+    icon: "EyeOutlined",
     family: "structure",
     shape: "default",
     role: "usage",
@@ -569,7 +569,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   renderingDef: {
     kind: "renderingDef",
     label: "渲染定义",
-    icon: "▨",
+    icon: "BgColorsOutlined",
     family: "structure",
     shape: "default",
     role: "definition",
@@ -583,7 +583,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   metadataDef: {
     kind: "metadataDef",
     label: "元数据定义",
-    icon: "⚙",
+    icon: "ToolOutlined",
     family: "metadata",
     shape: "default",
     role: "definition",
@@ -597,7 +597,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   comment: {
     kind: "comment",
     label: "注释",
-    icon: "💬",
+    icon: "CommentOutlined",
     family: "annotation",
     shape: "annotation",
     role: "member",
@@ -611,7 +611,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   documentation: {
     kind: "documentation",
     label: "文档",
-    icon: "📄",
+    icon: "FileTextOutlined",
     family: "annotation",
     shape: "annotation",
     role: "member",
@@ -625,7 +625,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   textualRepresentation: {
     kind: "textualRepresentation",
     label: "文本表示",
-    icon: "📝",
+    icon: "FileTextOutlined",
     family: "annotation",
     shape: "annotation",
     role: "member",
@@ -639,7 +639,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   subject: {
     kind: "subject",
     label: "主体",
-    icon: "👤",
+    icon: "UserOutlined",
     family: "structure",
     shape: "default",
     role: "member",
@@ -653,7 +653,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   stakeholder: {
     kind: "stakeholder",
     label: "利益相关者",
-    icon: "👥",
+    icon: "TeamOutlined",
     family: "structure",
     shape: "default",
     role: "stakeholder",
@@ -667,7 +667,7 @@ export const SYSML_NODE_MAPPING: Record<ElementKind, SysmlNodeMapping> = {
   attributeUsage: {
     kind: "attributeUsage",
     label: "属性使用",
-    icon: "⬢",
+    icon: "FieldNumberOutlined",
     family: "structure",
     shape: "default",
     role: "member",

@@ -65,6 +65,24 @@ export type RelationKind =
   | "annotate"
   | "allocate";
 
+export type GroupType =
+  | "attributes"
+  | "ports"
+  | "operations"
+  | "parts"
+  | "requirements"
+  | "behaviors"
+  | "annotations"
+  | "entry"
+  | "do"
+  | "exit"
+  | "transitions"
+  | "flows"
+  | "text"
+  | "subject"
+  | "constraints"
+  | "relations";
+
 export interface RangeInfo {
   line: number;
   column: number;
