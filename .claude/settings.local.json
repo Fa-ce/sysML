@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(pnpm run *)",
+      "Bash(pnpm add *)",
+      "Bash(pnpm list *)",
+      "Bash(Get-ChildItem -Path \"F:\\\\仁谷\\\\建模-syson\\\\syson-ui-v2\\\\syson-2026.3.0\\\\frontend\\\\syson\\\\src\" -Directory)",
+      "Bash(Select-Object -ExpandProperty Name)",
+      "Bash(xargs grep -l \"minimap\\\\|zoom\\\\|fit\\\\|export\\\\|undo\\\\|redo\")",
+      "Skill(superpowers:brainstorming)",
+      "Bash(grep -E \"\\\\.\\(tsx?|jsx?\\)$\")",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash([ -f \"$icon.js\" ])",
+      "Bash(dir F:仁谷建模-syson *)",
+      "Bash(grep -E \"SquareOutlined$|DiamondOutlined|HalfCircleOutlined\")",
+      "Bash(Get-ChildItem -Path \"F:\\\\仁谷\\\\建模-syson\" -Recurse -Filter \"ModelBrowser.vue\")",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Get-ChildItem -Path \"F:\\\\仁谷\\\\建模-syson\" -Recurse -Filter \"ModelBrowser.vue\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -First 5)",
+      "Bash(Get-ChildItem -Path \"F:\\\\仁谷\\\\建模-syson\\\\syson-front\" -Filter \"*.vue\")",
+      "Bash(Select-Object -First 20)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(xargs grep -l \"x6\\\\|graph\\\\|canvas\")",
+      "Bash(xargs grep -l \"x6\\\\|Graph\\\\|Node\\\\|Edge\")"
+    ]
+  }
+}
