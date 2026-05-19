@@ -68,6 +68,12 @@ function getElementGroupType(kind: ElementKind): GroupType | null {
 		requirementUsage: "requirements",
 		subject: "subject",
 
+		// 状态和行为容器（本身是容器，不属于任何虚拟分组）
+		stateDef: null,
+		stateUsage: null,
+		actionDef: null,
+		actionUsage: null,
+
 		// 无分组的容器
 		package: null,
 		portDef: null,
